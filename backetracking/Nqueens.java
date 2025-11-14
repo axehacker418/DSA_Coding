@@ -1,3 +1,4 @@
+package backetracking;
 import java.util.Scanner;
 
 public class Nqueens{
