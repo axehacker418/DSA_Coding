@@ -185,6 +185,20 @@ public class BinarytreeA {
 
     }
 
+    public static  void Klavel(Node root,int level,int k){
+        if (root==null) {
+            return;
+            
+        }
+        if (level==k) {
+            System.out.print(root.data + " ");
+            return;
+
+            
+        }
+        Klavel(root.left,level+1,k);
+        Klavel(root.right, level+1,k);
+    }
     public static void main(String[] args) {
         int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
 
@@ -212,6 +226,9 @@ public class BinarytreeA {
 
         System.out.println("the diameter Using Approach 2 O(n) "+ tree.diameter(root).daim);
         System.out.println("the height Using Approach 2 O(n) "+ tree.diameter(root).ht);
+
+        System.out.println("K lavel" );
+        Klavel(root,1,2);
 
     }
 
