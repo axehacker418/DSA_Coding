@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -111,6 +112,54 @@ public class Bst {
 
     }
 
+    public static void printinRange(Node root, int k1, int k2) {
+        if (root == null) {
+            return;
+
+        }
+        if (root.data >= k1 && root.data <= k2) {
+            printinRange(root.left, k1, k2);
+            System.out.print(root.data + " ");
+            printinRange(root.right, k1, k2);
+        } else if (root.data < k1) {
+            printinRange(root.right, k1, k2);
+
+        } else {
+            printinRange(root.left, k1, k2);
+        }
+
+    }
+
+
+    public static void printPath(ArrayList<Integer> path){
+        for(int i=0; i<path.size(); i++){
+            System.out.print(path.get(i)+"->");
+        }
+        System.out.println("N");
+
+    }
+    public static void leafPath(Node root , ArrayList<Integer> path){
+        if (root==null) {
+            return;
+        }
+         path.add(root.data);
+       
+         if (root.left==null && root.right==null) {
+            printPath(path);
+            
+         }
+
+         leafPath(root.left, path);
+         leafPath(root.right, path);
+         path.remove(path.size()-1);
+        
+    }
+
+    public static boolean validTree(Node root){
+        
+        return true;
+    }
+
     public static void main(String[] args) {
         int nodes[] = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };// { 1, 2, 4, 5, 3, 6, };
         Node root = null;
@@ -123,6 +172,12 @@ public class Bst {
 
         root = delete(root, 4); // delete value 4
         inorder(root); // should reflect deletion
+        System.out.println();
+        printinRange(root, 5, 12);
+        System.out.println();
+
+        ArrayList<Integer> path=new ArrayList<>();
+        leafPath(root, path);
 
     }
 
