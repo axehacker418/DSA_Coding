@@ -130,108 +130,194 @@ public class Bst {
 
     }
 
-
-    public static void printPath(ArrayList<Integer> path){
-        for(int i=0; i<path.size(); i++){
-            System.out.print(path.get(i)+"->");
+    public static void printPath(ArrayList<Integer> path) {
+        for (int i = 0; i < path.size(); i++) {
+            System.out.print(path.get(i) + "->");
         }
         System.out.println("N");
 
     }
-    public static void leafPath(Node root , ArrayList<Integer> path){
-        if (root==null) {
+
+    public static void leafPath(Node root, ArrayList<Integer> path) {
+        if (root == null) {
             return;
         }
-         path.add(root.data);
-       
-         if (root.left==null && root.right==null) {
-            printPath(path);
-            
-         }
+        path.add(root.data);
 
-         leafPath(root.left, path);
-         leafPath(root.right, path);
-         path.remove(path.size()-1);
-        
+        if (root.left == null && root.right == null) {
+            printPath(path);
+
+        }
+
+        leafPath(root.left, path);
+        leafPath(root.right, path);
+        path.remove(path.size() - 1);
+
     }
 
-    public static boolean isValidBST(Node root,Node min , Node max){
-        if (root==null) {
+    public static boolean isValidBST(Node root, Node min, Node max) {
+        if (root == null) {
             return true;
         }
-        if (min!=null && root.data<=min.data) {
+        if (min != null && root.data <= min.data) {
             return false;
-        }
-        else if(max!=null && root.data>=max.data){
+        } else if (max != null && root.data >= max.data) {
             return false;
 
         }
 
-        return isValidBST(root.left, min, root)&& isValidBST(root.right, root, max);
+        return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
     }
 
-
-    // mirror a bst mean make right subtree and to left subtree and left nodes 
+    // mirror a bst mean make right subtree and to left subtree and left nodes
     public static Node mirrorTree(Node root) {
 
-        if (root==null) {
+        if (root == null) {
             return null;
         }
-        Node leftmirror= mirrorTree(root.left);
-       Node rightmirror= mirrorTree(root.right);
+        Node leftmirror = mirrorTree(root.left);
+        Node rightmirror = mirrorTree(root.right);
         Node swap;
 
-        
-        root.left=rightmirror;
-        root.right=leftmirror;
+        root.left = rightmirror;
+        root.right = leftmirror;
         return root;
 
-        
     }
 
-    public static void preorder(Node root){
-        if (root==null) {
+    public static void preorder(Node root) {
+        if (root == null) {
             return;
-            
+
         }
-        System.out.print(root.data+" ");
+        System.out.print(root.data + " ");
         preorder(root.left);
         preorder(root.right);
     }
-    
+
+    // Sorted array to BST array divide in two part mid is root lees in left grater
+    // in right side balensed tree
+
+    public static Node creatBST(int[] arr, int st, int end) {
+    if(st>end)
+
+    {
+        return null;
+
+    }
+    int mid = (st + end) / 2;
+    Node root = new Node(arr[mid]);root.left=
+
+    creatBST(arr, st, mid - 1);
+        root.right = creatBST(arr, mid + 1, end);
+        return root;
+
+    }
+
+    public static void getInorder(Node root, ArrayList<Integer> inorder) {
+        if (root == null) {
+            return;
+
+        }
+        getInorder(root.left, inorder);
+        inorder.add(root.data);
+        getInorder(root.right, inorder);
+    }
+
+    public static Node createBST(ArrayList<Integer> inorder, int st, int end) {
+        if (st > end) {
+            return null;
+
+        }
+        int mid = (st + end) / 2;
+        Node root = new Node(inorder.get(mid));
+        root.left = createBST(inorder, st, mid - 1);
+        root.right = createBST(inorder, mid + 1, end);
+
+        return root;
+    }
+
+    public static Node balencedBST(Node root) {
+        // step create inorder sequence step2 make balenced tree using array
+        ArrayList<Integer> inorder = new ArrayList<>();
+        getInorder(root, inorder);
+        // createBST(inorder, 0, inorder.size()-1);
+
+        // return root;
+        return createBST(inorder, 0, inorder.size() - 1);
+    }
+
+    // public static void main(String[] args) {
+    // int nodes[] = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };// { 1, 2, 4, 5, 3, 6, };
+    // Node root = null;
+    // for (int i = 0; i < nodes.length; i++) {
+    // root = insert(root, nodes[i]);
+    // }
+    // inorder(root);
+    // // System.out.println();
+    // // searchK(root, 2);
+
+    // // root = delete(root, 4); // delete value 4
+    // // inorder(root); // should reflect deletion
+    // // System.out.println();
+    // // printinRange(root, 5, 12);
+    // // System.out.println();
+
+    // // ArrayList<Integer> path=new ArrayList<>();
+    // // leafPath(root, path);
+
+    // // System.out.print("validity check is - ");
+
+    // // if (isValidBST(root, null, null)) {
+    // // System.out.println("Valid");
+
+    // // }
+    // // else{
+    // // System.out.println("Invalid");
+    // // }
+
+    // // System.out.println();
+    // // mirrorTree(root);
+    // // preorder(root);
+
+    // // int arr[] = { 3, 5, 6, 8, 10, 11, 12 };
+    // // Node root = creatBST(arr, 0, arr.length - 1);
+    // // preorder(root);
+
+    // balencedBST(root);
+
+    // }
+
+
+
     public static void main(String[] args) {
-        int nodes[] = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };// { 1, 2, 4, 5, 3, 6, };
+
+        // -----------------------------
+        // 1. INSERT NODES INTO THE BST
+        // -----------------------------
+        int nodes[] = { 8, 5, 3, 1, 4, 6, 10, 11, 14 };
         Node root = null;
+
         for (int i = 0; i < nodes.length; i++) {
             root = insert(root, nodes[i]);
         }
+
+        System.out.println("Original BST (inorder):");
         inorder(root);
         System.out.println();
-        searchK(root, 2);
 
-        root = delete(root, 4); // delete value 4
-        inorder(root); // should reflect deletion
+        // -----------------------------
+        // 2. BALANCE THE BST
+        // -----------------------------
+        Node balanced = balencedBST(root);
+
+        System.out.println("\nBalanced BST (preorder):");
+        preorder(balanced);
         System.out.println();
-        printinRange(root, 5, 12);
+
+        System.out.println("Balanced BST (inorder):");
+        inorder(balanced);
         System.out.println();
-
-        ArrayList<Integer> path=new ArrayList<>();
-        leafPath(root, path);
-
-        System.out.print("validity check is - ");
-
-        if (isValidBST(root, null, null)) {
-            System.out.println("Valid");
-            
-        }
-        else{
-            System.out.println("Invalid");
-        }
-
-
-        System.out.println();
-        mirrorTree(root);
-        preorder(root);
 
     }
 
