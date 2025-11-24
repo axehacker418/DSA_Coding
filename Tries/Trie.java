@@ -14,7 +14,8 @@ public class Trie {
     
     //insertion in tries important in fang companies    O(l)  where l =largest word's length 
     public static void main(String[] args) {
-        
+
+        int a=0;
         
     }
 }
