@@ -12,10 +12,44 @@ public class Trie {
 
     public static Node root=new Node();// always empty root node
     
+    public static void insert(String word){ //O(L)
+        Node curr=root;
+        for(int level=0; level<word.length(); level++){
+            int idx=word.charAt(level)-'a';
+            if (curr.children[idx]==null) {
+                curr.children[idx]=new Node();                
+            }
+            curr=curr.children[idx];
+        }
+        curr.eow=true;
+
+    }
     //insertion in tries important in fang companies    O(l)  where l =largest word's length 
+
+
+// Searching
+    public static boolean search(String key){ //O(L)
+        Node curr=root;
+        for(int level=0; level<key.length(); level++){
+            int idx=key.charAt(level)-'a';
+            if (curr.children[idx]==null) {
+                return false;
+            }
+            curr=curr.children[idx];
+        }
+        return curr.eow=true;
+
+    }
+
+
     public static void main(String[] args) {
 
-        int a=0;
+        String words[]={"the", "there","ok"};
+        for(int i=0; i<words.length; i++){
+            insert(words[i]);
+        }
+        System.out.println(search("the"));
+        System.out.println(search("an"));
         
     }
 }
