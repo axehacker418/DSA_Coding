@@ -1,0 +1,7 @@
+fibonacci
+01knapsac
+unbounded knapsack
+lcs
+kadnes algo arrays
+gatalannumber
+dp on grid 
