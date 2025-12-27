@@ -50,6 +50,14 @@ public class ZeroOneKnapsack {
     //to perform tabulation :- create table and assign meaning and fill in bottom up manner 
 
 
+    /*
+    create table 
+    mening assign 
+    fill bottom uo small to large 
+    i=items values0 n+1 
+    j= capacity    w+1
+    */
+
     public static int maxprofitTab(int[] val, int[] wt, int w){
         int n=val.length;
         int[][] dp=new int[n+1][w+1];
