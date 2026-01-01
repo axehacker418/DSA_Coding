@@ -1,0 +1,5 @@
+two matrix multiply 
+1 aXb . cXd : should be  b==c 
+2 find result => matrix aXd
+3 operations total => a*b*d or a*c*d;
+ 
