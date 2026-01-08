@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class MinJumps {
+    
     public static int minJ(int nums[]){
         int n=nums.length;
         int dp[]=new int[n];
@@ -25,6 +26,7 @@ public class MinJumps {
     }
     public static void main(String[] args) {
         int arr[]={2,3,1,1,4};
+       
         System.out.println(minJ(arr));
 
     }
